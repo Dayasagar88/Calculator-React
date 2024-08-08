@@ -26,6 +26,7 @@ const Calculator = () => {
         setHistory(value)
       }
     } catch (e) {
+      setHistory("")
       setValue("Error");
     }
   };
@@ -36,6 +37,9 @@ const Calculator = () => {
     }
     if(value.length === 1){
       setHistory("")
+    }
+    if(value === "Error"){
+      setValue("")
     }
   }
 
