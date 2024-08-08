@@ -4,6 +4,7 @@ import Inputs from "./Inputs";
 
 const Calculator = () => {
   const [value, setValue] = useState("");
+  const [history , setHistory] = useState("")
 
   const handleValueChange = (newValue) => {
     if (value === "Error") {
@@ -17,10 +18,12 @@ const Calculator = () => {
     try {
       if(value === "Error"){
         setValue("")
+        return;
       }
-      const result = eval(value.replace(/×/g, "*").replace(/÷/, "/"));
+      const result = eval(value.replace(/×/g, "*").replace(/÷/, "/").replace(/−/g , "-"));
       if (result !== undefined) {
         setValue(result.toString());
+        setHistory(value)
       }
     } catch (e) {
       setValue("Error");
@@ -30,6 +33,9 @@ const Calculator = () => {
   const handleRemove = () => {
     if(value !== ""){
       setValue(value.slice(0, -1))
+    }
+    if(value.length === 1){
+      setHistory("")
     }
   }
 
@@ -43,12 +49,13 @@ const Calculator = () => {
               - Operation buttons
         */}
 
-      <DisplayScreen receivedValue={value} />
+      <DisplayScreen receivedValue={value} history={history} />
       <Inputs
         setValue={handleValueChange}
         clearValues={setValue}
         removeValue={handleRemove}
         setResult={handleResult}
+        setHistory={setHistory}
       />
     </div>
   );

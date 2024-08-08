@@ -1,4 +1,4 @@
-const Inputs = ({ setValue, clearValues, removeValue, setResult }) => {
+const Inputs = ({ setValue, clearValues, removeValue, setResult, setHistory }) => {
   
   const inputs = [
     "AC",
@@ -38,6 +38,7 @@ const Inputs = ({ setValue, clearValues, removeValue, setResult }) => {
 
   const handleClear = () => {
     clearValues("");
+    setHistory("")
   };
 
   const handleInput = (input) => {
